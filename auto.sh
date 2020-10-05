@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# When run, this script will :
+# set up the environment,
+# build & run the docker-compose,
+# show the slacks status
+
 # Create directory for shared Volume web
 mkdir -p web
 
