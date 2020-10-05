@@ -5,8 +5,8 @@ LABEL maintainer="alexandre.michel@reseau.eseo.fr"
 
 # Install Apache2/PHP
 RUN apk update && \
-    apk add --no-cache apache2 curl \
-    php7 php7-apache2 php7-mysqli php7-curl php7-mbstring php7-dom
+    apk add --no-cache apache2 php7 curl \
+    php7-apache2 php7-mysqli php7-curl php7-mbstring php7-dom php7-jason
 
 # Install Wordpress
 RUN sed -i 's#"/var/www/localhost/htdocs"#"/web/wordpress"#g' /etc/apache2/httpd.conf && \
