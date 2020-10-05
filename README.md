@@ -1,3 +1,3 @@
 # docker-wordpress
 
-Use the "init.sh' script to launch the docker stacks.
+Use the "init.sh" script to launch the docker stacks.
