@@ -1,11 +1,15 @@
 #!/bin/bash
 
-echo "remove old containers"
+echo "Remove old containers"
 docker rm -f db-mysql
 docker rm -f srv-web
 
-echo "run MySQL"
+echo "Create a network for container communication"
+docker network create -d bridge wordpress_ntw | true 2> /dev/null
+
+echo "Run MySQL"
 docker run --rm --name db \
+           --network wordpress_ntw \
            -e MYSQL_ROOT_PASSWORD=network \
            -e MYSQL_DATABSE=wordpress_db \
            -e MYSQL_USER=wordpress \
@@ -13,12 +17,13 @@ docker run --rm --name db \
            -v ./db:/var/lib/mysql \
            -d mysql:5.7.31
 
-echo "run Web server (with wordpress)"
+echo "Run Web server (with wordpress)"
 docker run --rm --name web \
+           --network wordpress_ntw \
            --link db:db \
            -e WORDPRESS_DB_HOST=db \
+           -e WORDPRESS_DB_NAME=wordpress_db \
            -e WORDPRESS_DB_USER=wordpress \
            -e WORDPRESS_DB_PASSWORD=network \
-           -e WORDPRESS_DB_NAME=wordpress_db \
            -v ./web:/var/www/localhost/htdocs \
            -d -p 8888:80 dk-wordpress
