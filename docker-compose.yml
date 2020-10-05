@@ -1,0 +1,50 @@
+version: '2.0'
+
+services:
+
+  db:
+    image: mysql:5.7.31
+    container_name: mysql-stack
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      TZ: "Europe/Rome"
+      MYSQL_ROOT_PASSWORD: network
+      MYSQL_DATABASE: wordpress_db
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: network
+    networks:
+      - wp-net
+    volumes:
+      - ./db:/var/lib/mysql
+
+  web:
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: wordpress
+    container_name: apache_php-stack
+    restart: always
+    links:
+      - db:db
+    ports:
+      - 8888:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: network
+      WORDPRESS_DB_NAME: wordpress_db
+    networks:
+      - wp-net
+    volumes:
+      - ./web:/var/www/html
+
+networks:
+  wp-net:
+    driver: bridge
+
+volumes:
+  db:
+  web:
