@@ -9,11 +9,11 @@ RUN apk update && \
     php7-apache2 php7-mysqli php7-curl php7-mbstring php7-dom
 
 # Install Wordpress
-RUN sed -i 's#"/var/www/localhost/htdocs"#"/web/wordpress"#g' /etc/apache2/httpd.conf && \
-    mkdir -p /web && \
+RUN mkdir -p /web && \
     curl -o wordpress.tar.gz -fSL "https://wordpress.org/wordpress-5.5.1.tar.gz" && \
     tar -xzf wordpress.tar.gz -C /web && \
     rm wordpress.tar.gz && \
+    sed -i 's#"/var/www/localhost/htdocs"#"/web/wordpress"#g' /etc/apache2/httpd.conf && \
 
 # Wordpress configuration 
     cp /web/wordpress/wp-config-sample.php /web/wordpress/wp-config.php && \
