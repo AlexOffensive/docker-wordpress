@@ -5,7 +5,7 @@ docker rm -f db-mysql
 docker rm -f srv-web
 
 echo "Create a network for container communication"
-docker network create -d bridge wordpress_ntw | true 2> /dev/null
+docker network create -d bridge wordpress_ntw
 
 echo "Run MySQL"
 docker run --rm --name db \
@@ -14,7 +14,7 @@ docker run --rm --name db \
            -e MYSQL_DATABSE=wordpress_db \
            -e MYSQL_USER=wordpress \
            -e MYSQL_PASSWORD=network \
-           -v ./db:/var/lib/mysql \
+           -v /db:/var/lib/mysql \
            -d mysql:5.7.31
 
 echo "Run Web server (with wordpress)"
@@ -25,5 +25,5 @@ docker run --rm --name web \
            -e WORDPRESS_DB_NAME=wordpress_db \
            -e WORDPRESS_DB_USER=wordpress \
            -e WORDPRESS_DB_PASSWORD=network \
-           -v ./web:/var/www/http \
+           -v /web:/var/www/http \
            -d -p 8888:80 dk-wordpress
