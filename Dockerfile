@@ -2,10 +2,10 @@
 
 FROM alpine:3.12
 
-# Install Apache2 / PHP / MySQL
+# Install Apache2/PHP
 RUN apk update && \
     apk add --no-cache apache2 \
-    php7 php7-mysqli php7-apache2 curl
+    php7 php7-apache2 php7-mysqli php7-curl php7-mbstring php7-dom
 
 # Install Wordpress
 RUN sed -i 's#"/var/www/localhost/htdocs"#"/web/wordpress"#g' /etc/apache2/httpd.conf && \
