@@ -13,7 +13,6 @@ RUN mkdir -p /web && \
     curl -o wordpress.tar.gz -fSL "https://wordpress.org/wordpress-5.5.1.tar.gz" && \
     tar -xzf wordpress.tar.gz -C /web && \
     rm wordpress.tar.gz && \
-    sed -i 's#"/var/www/localhost/htdocs"#"/web/wordpress"#g' /etc/apache2/httpd.conf && \
 
 # Wordpress configuration 
     cp /web/wordpress/wp-config-sample.php /web/wordpress/wp-config.php && \
@@ -21,6 +20,7 @@ RUN mkdir -p /web && \
     chown -R apache:apache /var/www/localhost/htdocs && \
     chown -R apache.www-data /var/www/localhost/htdocs && \
     chown -R apache:apache /web && chown -R apache.www-data /web && \
+    sed -i 's#"/var/www/localhost/htdocs"#"/web/wordpress"#g' /etc/apache2/httpd.conf && \
 
 # Wordpress Database config
     sed -i "s|define( 'DB_NAME', 'database_name_here' );|define( 'DB_NAME', 'wordpress_db'); |g" /web/wordpress/wp-config.php && \
