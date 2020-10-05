@@ -25,5 +25,5 @@ docker run --rm --name web \
            -e WORDPRESS_DB_NAME=wordpress_db \
            -e WORDPRESS_DB_USER=wordpress \
            -e WORDPRESS_DB_PASSWORD=network \
-           -v ./web:/var/www/localhost/htdocs \
+           -v ./web:/web/wordpress \
            -d -p 8888:80 dk-wordpress
