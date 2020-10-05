@@ -11,3 +11,6 @@ docker-compose build
 
 # Start the previously created stack
 docker-compose up -d
+
+# Verify the state of slacks
+docker ps
