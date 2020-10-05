@@ -2,8 +2,8 @@ Require :
   - docker
   - docker-compose
 
-To install wordpress with docker :
+Wordpress install with docker :
 
-1/ Run auto.sh script to install wordpress's docker.
+1/ Run auto.sh script for auto install of containers.
 or
-2/ Run build.sh & run.sh to install the wordpress's docker.
+2/ Run build.sh & run.sh for step by step install of containers.
