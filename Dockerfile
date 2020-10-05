@@ -1,6 +1,7 @@
 ### Dockerfile ###
 
 FROM alpine:3.12
+LABEL maintainer="alexandre.michel@reseau.eseo.fr"
 
 # Install Apache2/PHP
 RUN apk update && \
@@ -17,6 +18,8 @@ RUN sed -i 's#"/var/www/localhost/htdocs"#"/web/wordpress"#g' /etc/apache2/httpd
 # Wordpress configuration 
     cp /web/wordpress/wp-config-sample.php /web/wordpress/wp-config.php && \
     mkdir -p /run/apache2 && chown -R apache:apache /run/apache2 && \
+    chown -R apache:apache /var/www/localhost/htdocs && \
+    chown -R apache.www-data /var/www/localhost/htdocs && \
     chown -R apache:apache /web && chown -R apache.www-data /web && \
 
 # Wordpress Database config
