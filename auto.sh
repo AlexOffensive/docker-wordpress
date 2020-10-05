@@ -12,9 +12,11 @@ mkdir -p web
 mkdir -p db
 
 # Build the docker-compose config
+echo "Build the docker-compose"
 docker-compose build
 
 # Start the previously created stack
+echo "Start the docker containers"
 docker-compose up -d
 
 # Verify the state of slacks
